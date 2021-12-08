@@ -1,0 +1,77 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+<h1 class="text-center">{{ item.title }}</h1>
+
+
+<ul class="nav nav-tabs">
+  <li role="presentation" {% if category == 'all' %} class="active" {% endif %}><a href="{% url 'catalog' cat='all' %}">Все товары</a></li>
+  <li role="presentation" {% if category == 'cat_1' %} class="active" {% endif %}><a href="{% url 'catalog' cat='cat_1' %}">Торты</a></li>
+  <li role="presentation" {% if category == 'cat_2' %} class="active" {% endif %}><a href="{% url 'catalog' cat='cat_2' %}">Пироги</a></li>
+  <li role="presentation" {% if category == 'cat_3' %} class="active" {% endif %}><a href="{% url 'catalog' cat='cat_3' %}">Пирожные</a></li>
+  <li role="presentation" {% if category == 'cat_4' %} class="active" {% endif %}><a href="{% url 'catalog' cat='cat_4' %}">Печенье</a></li>
+</ul>
+{% for item in items %}
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">{{ item.name }} <small>Категория: {{ item.get_category_display }}</small></h3>
+	</div>
+	<div class="panel-body">
+		<div class="media">
+			<div class="media-left">
+				<img class="media-object img-rounded img-shop" src="{{ item.image.url }}"  alt="Image)">
+			</div>
+			<div class="media-body">
+				<h4 class="media-heading">{{ item.short }}</h4>
+			</div>
+		</div>
+		
+	</div>
+	<div class="panel-footer d-flex jc-between">
+		<h4>Цена: {{ item.price }}$</h4>
+		<a href="{% url 'addToCart' %}?product={{item.id}}" class="btn btn-success">В корзину</a>
+	</div>
+</div>
+
+
+<ul class="pagination">
+    {% if items.has_previous %}
+        <li>
+            <a href="?page={{ items.previous_page_number }}" aria-label="Prev">
+            <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+    {% else %}
+        <li class="disabled">
+            <a href="#" aria-label="Prev">
+            <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+    {% endif %}
+    {% for num in items.paginator.page_range %}
+    <li {% if num == items.number %} class="active" {% endif %}><a href="?page={{ num }}">{{ num }}</a></li>
+    {% endfor %}
+    {% if items.has_next %}
+        <li>
+            <a href="?page={{ items.next_page_number }}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    {% else %}
+        <li  class="disabled">
+            <a href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    {% endif %}
+</ul>
+
+{% endfor %}
+
+
+{% endblock %}
+
+
+
+

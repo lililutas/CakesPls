@@ -1,0 +1,61 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+<h1 class="text-center">{{ title }}</h1>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Заказ №{{ order.id }}</h3>
+	</div>
+	<div class="panel-body">
+		<table class="table">
+			<tr>
+				<th>Картинка</th>
+				<th>Описание</th>
+				<th>Цена</th>
+				<th>Количество</th>
+				<th>Общая цена</th>
+				<th>Удалить</th>
+			</tr>
+			
+			{% for item in items %}
+
+			<tr>
+				<th><img src="{{ item.product.image.url }}" class="img-cart" /></th>
+				<th>{{ item.product.short }}</th>
+				<th>{{ item.product.price }}$</th>
+				
+				<th>
+					<a href="{% url 'changeQuantity' %}?item={{item.id}}&action=minus&order={{order.id}}&next={{status}}" class="btn"><span class="glyphicon glyphicon-minus"></span></a>
+					{{item.quantity}}
+					<a href="{% url 'changeQuantity' %}?item={{item.id}}&action=plus&order={{order.id}}&next={{status}}" class="btn"><span class="glyphicon glyphicon-plus"></span></a>
+				</th>
+				<th>{{ item.price }}$</th>
+				<th> <a href="{% url 'cart'  %}" class="btn btn-danger btn-xs">Удалить</a> </th>
+			</tr>
+
+
+			{% endfor %}
+
+
+		</table>
+	</div>	
+	<div class="panel-footer d-flex jc-between">
+		<h4>Общая стоимость: {{ order.total_price }}$</h4>
+
+		{% if status == 'cart' %}
+		<a href="{% url 'dealOrder' %}" class="btn btn-success">Оформить заказ</a>
+		{% else %}
+		{% if profile.role == 'client' %}
+		<a href="{% url 'deleteOrder' %}?order={{order.id}}&next=myOrders" class="btn btn-danger">Отменить заказ</a>
+		{% else %}
+		<a href="{% url 'deleteOrder' %}?order={{order.id}}&next=allOrders" class="btn btn-danger">Отменить заказ</a>
+		{% endif %}
+		{% endif %}
+	</div>
+</div>
+
+
+
+{% endblock %}

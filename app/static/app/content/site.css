@@ -1,0 +1,166 @@
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+
+
+/*layout*/
+
+body {
+    background-image: url('bg.jpg');
+}
+
+.body-content {
+    height: 100%;
+
+    background-color: #fff;
+}
+
+/*/layout*/
+
+
+/*news*/
+
+.img-news {
+    max-height: 300px;
+    max-width: 300px;
+}
+
+.img-left {
+    display: inline;
+}
+/*/news*/
+
+/*catalog*/
+
+.img-shop {
+    max-height: 200px;
+    max-width: 200px;
+}
+
+.img-cart {
+    max-height: 100px;
+    max-width: 100px;
+}
+
+/*/catalog*/
+
+/*helpers*/
+.mt-2 {
+    margin-top: 2%;
+}
+
+.img {
+    height: 100%;
+    width: auto;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.jc-between {
+    justify-content: space-between;
+}
+/*/helpers*/
+/*bootstraps*/
+.media {
+    margin-top: 15px;
+}
+
+.media:first-child {
+    margin-top: 0;
+}
+
+.media,
+.media-body {
+    overflow: hidden;
+    zoom: 1;
+}
+
+.media-body {
+    width: 10000px;
+}
+
+.media-object {
+    display: block;
+}
+
+    .media-object.img-thumbnail {
+        max-width: none;
+    }
+
+.media-right,
+.media > .pull-right {
+    padding-left: 10px;
+}
+
+.media-left,
+.media > .pull-left {
+    padding-right: 10px;
+}
+
+.media-left,
+.media-right,
+.media-body {
+    display: table-cell;
+    vertical-align: top;
+}
+
+.media-middle {
+    vertical-align: middle;
+}
+
+.media-bottom {
+    vertical-align: bottom;
+}
+
+.media-heading {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.media-list {
+    padding-left: 0;
+    list-style: none;
+}
+/*/bootstrap*/

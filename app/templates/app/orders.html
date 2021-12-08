@@ -1,0 +1,35 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+<h1 class="text-center">{{ title }}</h1>
+
+{% for item in items %}
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Заказ №{{ item.id }}</h3>
+	</div>
+	<div class="panel-body">
+	<table class="table">
+			<tr>
+				<th>Стоимость</th>
+				<th>Статус</th>
+			</tr>
+			<tr>
+				
+				<th>{{ item.total_price }}$</th>
+				<th>{{ item.get_status_display }}</th>
+			</tr>
+		</table>	
+		
+	</div>
+	<div class="panel-footer d-flex jc-between">
+		<a href="{% url 'orderDetails' orderId=item.id %}" class="btn btn-primary">Подробности заказа</a>
+		<a href="{% url 'deleteOrder' %}?order={{item.id}}&next={{ordertype}}" class="btn btn-danger">Отменить заказ</a>
+	</div>
+</div>
+
+{% endfor %}
+
+
+{% endblock %}

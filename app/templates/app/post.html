@@ -1,0 +1,20 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+<h1 class="text-center">{{ item.title }}</h1>
+
+ <div class="media">
+	<div class="media-left">
+		<img class="media-object img-rounded" src="{{ item.image.url }}"  alt="Image)">
+	</div>
+	<div class="media-body">
+		<h4 class="media-heading">{{ item.description }}</h4>	
+	</div>
+</div>
+<p class="lead mt-2">
+   {{ item.content }}
+</p>
+
+
+{% endblock %}
