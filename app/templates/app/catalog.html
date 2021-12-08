@@ -30,7 +30,8 @@
 	</div>
 	<div class="panel-footer d-flex jc-between">
 		<h4>Цена: {{ item.price }}$</h4>
-		<a href="{% url 'addToCart' %}?product={{item.id}}" class="btn btn-success">В корзину</a>
+
+		<a href="{% if user.is_authenticated %}{% url 'addToCart' %}?product={{item.id}} {% else %} {% url 'registration' %} {% endif %}" class="btn btn-success">В корзину</a>
 	</div>
 </div>
 
