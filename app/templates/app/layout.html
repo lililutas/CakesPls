@@ -30,9 +30,11 @@
                     <li><a href="{% url 'contact' %}">Контакты</a></li>
                     <li><a href="{% url 'news' %}">Новости</a></li>
                     <li><a href="{% url 'catalog' %}">Каталог</a></li>
+                    {% if user.is_authenticated %}
                     <li><a href="{% url 'myOrders' %}">Мои заказы</a></li>
                     {% if userprofile.role != 'client' %}
                     <li><a href="{% url 'allOrders' %}">Заказы</a></li>
+                    {% endif %}
                     {% endif %}
                 </ul>
                 {% include 'app/loginpartial.html' %}
