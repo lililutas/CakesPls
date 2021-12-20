@@ -18,7 +18,22 @@
 			<tr>
 				
 				<th>{{ item.total_price }}$</th>
-				<th>{{ item.get_status_display }}</th>
+				<th>
+				{% if ordertype == 'allOrders' %}
+				<div class="btn-group">
+					<button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					{{ item.get_status_display }} <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+					{% if item.status != 'processed' %}<li><a href="{% url 'changeStatus' %}?order={{order.id}}&status=processed">Обрабатывается</a></li>{% endif %}
+					{% if item.status != 'intransit' %}<li><a href="{% url 'changeStatus' %}?order={{order.id}}&status=intransit">Доставляется</a></li>{% endif %}
+					{% if item.status != 'delivered' %}<li><a href="{% url 'changeStatus' %}?order={{order.id}}&status=delivered">Доставлен</a></li>{% endif %}
+					</ul>
+				</div>
+				{% else %}
+				{{ item.get_status_display }}
+				{% endif %}
+				</th>
 			</tr>
 		</table>	
 		

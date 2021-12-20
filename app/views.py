@@ -226,7 +226,12 @@ def changeQuantity(request):
     current_item = OrderDetails.objects.get(id = request.GET.get('item'))
     if request.GET.get('action') == 'minus':
         current_item.quantity -= 1
+        if current_item.quantity == 0:
+            response = redirect('deleteItem')
+            response['Location'] += '?item=' + str(current_item.id) + '&order=' + str(request.GET.get('order')) + '&next=' + str(request.GET.get('next'))
+            return response
         current_item.price = current_item.product.price * current_item.quantity
+
     else:
         current_item.quantity += 1
         current_item.price = current_item.product.price * current_item.quantity
@@ -242,7 +247,6 @@ def changeQuantity(request):
         return redirect(request.GET.get('next'), orderId = current_order.id)
     else:
         return redirect(reverse(request.GET.get('next')))
-
 #Сделать заказ
 
 def dealOrder(request):
@@ -314,6 +318,15 @@ def orderDetails(request, orderId):
         }
     )
 
+
+#Изменение статуса заказа
+
+
+def changeStatus(request):
+    current_order = Orders.objects.get(id = request.GET.get('order'))
+    current_order.status = request.GET.get('status')
+    current_order.save()
+    return redirect(reverse('allOrders'))
 
 
 
